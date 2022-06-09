@@ -1,12 +1,12 @@
-import productsservice from '../models/productsmodel';
+import productsmodel from '../models/productsmodel';
 
 async function getAll() {
-  const data = await productsservice.getAll();
+  const data = await productsmodel.getAll();
   return data;
 }
 
 async function createProduct(name: string, amount: string) {
-  const data = await productsservice.createProduct(name, amount);
+  const data = await productsmodel.createProduct(name, amount);
   // console.log(data);
   return data;
 }

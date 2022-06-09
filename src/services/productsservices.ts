@@ -5,6 +5,13 @@ async function getAll() {
   return data;
 }
 
+async function createProduct(name: string, amount: string) {
+  const data = await productsservice.createProduct(name, amount);
+  // console.log(data);
+  return data;
+}
+
 export default {
   getAll,
+  createProduct,
 };

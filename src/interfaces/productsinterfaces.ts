@@ -3,3 +3,5 @@ export interface Products {
   amount: string;
   orderId: string;
 }
+
+export type ProductsPreview = Omit<Products, 'orderId'>;

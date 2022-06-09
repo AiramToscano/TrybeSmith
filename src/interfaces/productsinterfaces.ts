@@ -5,3 +5,7 @@ export interface Products {
 }
 
 export type ProductsPreview = Omit<Products, 'orderId'>;
+
+export interface ProductsId extends ProductsPreview {
+  id: number
+}

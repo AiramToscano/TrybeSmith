@@ -3,7 +3,7 @@ import createtoken from '../utils/createJWT';
 
 async function getAll(username: string, password: string) {
   const data = await loginmodel.getAll(username, password);
-  if (!data) return { status: 401, message: 'Username or password invalid' };
+  if (!data) return false;
   const createToken = createtoken.createJWT(username);
   return createToken;
 }

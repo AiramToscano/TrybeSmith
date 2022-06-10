@@ -4,6 +4,6 @@ import userscontroller from '../controllers/usercontrollers';
 
 const userRoute = Router();
 
-userRoute.post('/products', userscontroller.createUser);
+userRoute.post('/users', userscontroller.createUser);
 
 export default userRoute;

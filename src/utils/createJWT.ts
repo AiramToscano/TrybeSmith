@@ -3,11 +3,13 @@ import jwtConfig from '../config/jwtConfig';
 
 const createJWT = (emailLogin: string) => {
   const signInOptions: SignOptions = {
-    algorithm: 'RS256',
+    algorithm: 'HS256',
     expiresIn: '1h',
   };
-  const token = sign({ data: emailLogin }, jwtConfig.secret, signInOptions);
-  return token;
+  const payload = {
+    name: emailLogin,
+  };
+  return sign(payload, jwtConfig.secret, signInOptions);
 };
 
 export default {

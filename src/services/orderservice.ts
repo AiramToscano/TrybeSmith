@@ -13,6 +13,15 @@ async function getAll() {
   return dataOrder;
 }
 
+async function newOrder(userId: number, data: number[]) {
+  const order = await ordersmodel.createOrder(userId);
+  data.forEach(async (e) => {
+    await ordersmodel.editProduct(e, order.id);
+  });
+  return true;
+}
+
 export default {
   getAll,
+  newOrder,
 };

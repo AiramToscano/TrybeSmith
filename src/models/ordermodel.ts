@@ -10,7 +10,7 @@ async function getAll(): Promise<Orders[]> {
 }
 
 async function createOrder(userId: number): Promise<Order> {
-  const query = 'INSERT INTO Trybesmith.Products (userId) VALUES (?)';
+  const query = 'INSERT INTO Trybesmith.Orders (userId) VALUES (?)';
   const [result] = await connection.execute<ResultSetHeader>(query, [userId]);
   const { insertId: id } = result;
   const newOrder: Order = { id };

@@ -1,7 +1,7 @@
 import { NextFunction, Response, Request } from 'express';
-import { verify } from 'jsonwebtoken';
+import { verify, decode } from 'jsonwebtoken';
 import jwtConfig from '../config/jwtConfig';
-// import { Verify } from '../interfaces/ordersinterfaces';
+import { JwtPayload } from '../interfaces/ordersinterfaces';
 
 const authToken = async (req: Request, res: Response, next: NextFunction) => {
   const token = req.headers.authorization;
@@ -24,7 +24,9 @@ const validToken = async (req: Request, res: Response, next: NextFunction) => {
 
 function validateProducts(req: Request, res: Response, next: NextFunction) {
   const { productsIds } = req.body;
-  if (!productsIds) return res.status(400).json({ message: '"productsIds" is required' });
+  if (!productsIds) {
+    return res.status(400).json({ message: '"productsIds" is required' });
+  }
   if (productsIds.constructor !== Array) {
     return res.status(422).json({ message: '"productsIds" must be an array' });
   }
@@ -34,8 +36,14 @@ function validateProducts(req: Request, res: Response, next: NextFunction) {
   next();
 }
 
+const decodedToken = async (token: string): Promise<JwtPayload> => {
+  const decoded = decode(token);
+  return decoded as JwtPayload;
+};
+
 export default {
   authToken,
   validToken,
   validateProducts,
+  decodedToken,
 };

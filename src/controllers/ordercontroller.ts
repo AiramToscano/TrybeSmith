@@ -15,10 +15,12 @@ async function getAll(_req: Request, res: Response) {
 
 async function createOrder(req: Request, res: Response) {
   try {
-    const { userId, productsIds } = req.body;
-    await orderservice.newOrder(userId, productsIds);
-    const obj = {
-      userId, 
+    const { productsIds } = req.body;
+    const token = req.headers.authorization;
+    const newToken = String(token);
+    const order = await orderservice.newOrder(productsIds, newToken);
+    const obj = { 
+      userId: order.id,
       productsIds,
     };
     return res.status(201).json(obj);

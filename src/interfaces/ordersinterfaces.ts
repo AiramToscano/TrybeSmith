@@ -12,3 +12,9 @@ export interface OrderProducts {
   productId: number,
   orderId: number,
 }
+
+export interface Verify{
+  id: number,
+  iat: number,
+  exp: number,
+}

@@ -16,13 +16,12 @@ async function getAll(_req: Request, res: Response) {
 async function createOrder(req: Request, res: Response) {
   try {
     const { userId, productsIds } = req.body;
-    console.log(userId, productsIds);
     await orderservice.newOrder(userId, productsIds);
     const obj = {
       userId, 
       productsIds,
     };
-    return res.status(STATUS_CODE_OK).json(obj);
+    return res.status(201).json(obj);
   } catch (err) {
     return res.status(500).json({ message: 'nenhuma order foi criada' });
   }

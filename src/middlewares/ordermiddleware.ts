@@ -1,4 +1,26 @@
 import { NextFunction, Response, Request } from 'express';
+import { verify } from 'jsonwebtoken';
+import jwtConfig from '../config/jwtConfig';
+// import { Verify } from '../interfaces/ordersinterfaces';
+
+const authToken = async (req: Request, res: Response, next: NextFunction) => {
+  const token = req.headers.authorization;
+  if (!token) {
+    return res.status(401).json({ message: 'Token not found' });
+  }
+  next();
+};
+
+const validToken = async (req: Request, res: Response, next: NextFunction) => {
+  const token = req.headers.authorization;
+  const newToken = String(token);
+  try {
+    verify(newToken, jwtConfig.secret);
+    next();
+  } catch (err) {
+    return res.status(401).json({ message: 'Invalid token' });
+  }
+};
 
 function validateProducts(req: Request, res: Response, next: NextFunction) {
   const { productsIds } = req.body;
@@ -13,5 +35,7 @@ function validateProducts(req: Request, res: Response, next: NextFunction) {
 }
 
 export default {
+  authToken,
+  validToken,
   validateProducts,
 };

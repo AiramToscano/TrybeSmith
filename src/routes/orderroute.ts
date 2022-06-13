@@ -5,6 +5,12 @@ import ordermiddleware from '../middlewares/ordermiddleware';
 const odersRoute = Router();
 
 odersRoute.get('/orders', ordercontroller.getAll);
-odersRoute.post('/orders', ordermiddleware.validateProducts, ordercontroller.createOrder);
+odersRoute.post(
+  '/orders',
+  ordermiddleware.authToken,
+  ordermiddleware.validToken,
+  ordermiddleware.validateProducts,
+  ordercontroller.createOrder,
+);
 
 export default odersRoute;

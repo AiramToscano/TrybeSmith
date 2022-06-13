@@ -15,10 +15,9 @@ async function getAll() {
 
 async function newOrder(userId: number, data: number[]) {
   const order = await ordersmodel.createOrder(userId);
-  data.forEach(async (e) => {
-    await ordersmodel.editProduct(e, order.id);
-  });
-  return true;
+  const teste = await ordersmodel.editProduct(data, order.id);
+
+  return teste;
 }
 
 export default {

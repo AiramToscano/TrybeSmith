@@ -13,6 +13,21 @@ async function getAll(_req: Request, res: Response) {
   }
 }
 
+async function createOrder(req: Request, res: Response) {
+  try {
+    const { userId, products } = req.body;
+    await orderservice.newOrder(userId, products);
+    const obj = {
+      userId, 
+      products,
+    };
+    return res.status(STATUS_CODE_OK).json(obj);
+  } catch (err) {
+    return res.status(500).json({ message: 'nenhuma order foi criada' });
+  }
+}
+
 export default {
   getAll,
+  createOrder,
 };

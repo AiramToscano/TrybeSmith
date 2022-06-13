@@ -15,11 +15,11 @@ async function getAll(_req: Request, res: Response) {
 
 async function createOrder(req: Request, res: Response) {
   try {
-    const { userId, products } = req.body;
-    await orderservice.newOrder(userId, products);
+    const { userId, productsIds } = req.body;
+    await orderservice.newOrder(userId, productsIds);
     const obj = {
       userId, 
-      products,
+      productsIds,
     };
     return res.status(STATUS_CODE_OK).json(obj);
   } catch (err) {

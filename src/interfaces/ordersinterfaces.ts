@@ -13,8 +13,12 @@ export interface OrderProducts {
   orderId: number,
 }
 
-export interface Verify{
-  id: number,
+export interface JwtPayload{
+  name: string,
   iat: number,
   exp: number,
+}
+
+export interface Userorder {
+  id: number,
 }
